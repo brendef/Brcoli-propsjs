@@ -6,12 +6,12 @@ const Navbar = ({
     color='light',
     collapse=false,
     contain=false,
-    navlinks= [
+    navlinks=[
         {text: 'Features', to: '/features'},
         {text: 'Pricing', to: '/pricing'}
     ],
     useLinkPosition='end',
-    buttons= [
+    buttons=[
         {text: 'login', to: '/login', color: 'warning' },
         {text: 'register', to: '/register'}
     ],
@@ -19,24 +19,26 @@ const Navbar = ({
     margin=''   // You can use an int
 }:any) => {
     
-    const useTitleText = title.hasOwnProperty('text') ? title.text : title
-    const useTitleLink = title.hasOwnProperty('link') ? title.link : '/'
-    const useContainerType = contain ? 'container' : 'container-fluid'
-    const useCollapse = !collapse && 'navbar-expand-lg'
-    const usePadding = padding
-    const usePaddingX = padding.x
-    const usePaddingY = padding.y
-    const useMargin = margin
-    const useMarginX = margin.x
-    const useMarginY = margin.y
+    // Variables and defaults
+    const useTitleText      = title.hasOwnProperty('text') ? title.text : title
+    const useTitleLink      = title.hasOwnProperty('link') ? title.link : '/'
+    const useContainerType  = contain ? 'container' : 'container-fluid'
+    const useCollapse       = !collapse ? 'navbar-expand-lg' : undefined
+    const useMargin         = margin
+    const usePadding        = padding
+    const usePaddingX       = padding.x
+    const usePaddingY       = padding.y
+    const useMarginX        = margin.x
+    const useMarginY        = margin.y
 
+    // Links for the navigation bar
     const renderLinks = () => (
         navlinks.map( (link:any, index:any) => {
 
             const useLinkText = link.constructor === Object ? link.text : link
             const useLinkTo = link.constructor === Object ? link.to : link
-            const useLinkActive = link.active && 'active'
-            const useLinkDisabled = link.disabled && 'disabled'
+            const useLinkActive = link.active ? 'active' : undefined
+            const useLinkDisabled = link.disabled ? 'disabled' : undefined
 
             return (
                 <a key={index + '_' + link.text} className={`nav-link ${useLinkActive} ${useLinkDisabled}`} aria-current='page' href={useLinkTo}>{useLinkText}</a>
@@ -44,14 +46,15 @@ const Navbar = ({
         })
     )
 
+    // Call to action buttons in the navigation bar
     const renderButtons = () => (
         buttons.map( (button:any, index:any) => {
 
             const useButtonText = button.hasOwnProperty('text') ? button.text : button
             const useButtonTo = button.hasOwnProperty('to') ? button.to : button
-            const useButtonDisabled = button.disabled && 'disabled'
+            const useButtonDisabled = button.disabled ? 'disabled' : undefined
             const buttonColour = button.hasOwnProperty('color') ? button.color : 'primary'
-            const useButtonTextColour = button.hasOwnProperty('textColor') && 'text-' + button.textColor 
+            const useButtonTextColour = button.hasOwnProperty('textColor') ? 'text-' + button.textColor : undefined
             const useButtonStyleColour = button.hasOwnProperty('style') ? 'btn-' + button.style + '-' + buttonColour  : 'btn-' + buttonColour
 
             return (
