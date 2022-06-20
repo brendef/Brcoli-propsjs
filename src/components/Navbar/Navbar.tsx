@@ -16,7 +16,8 @@ const Navbar = ({
         {text: 'register', to: '/register'}
     ],
     padding='', // You can use an int
-    margin=''   // You can use an int
+    margin='',  // You can use an int
+    activeLink=''
 }:any) => {
     
     // Variables and defaults
@@ -37,7 +38,7 @@ const Navbar = ({
 
             const useLinkText = link.constructor === Object ? link.text : link
             const useLinkTo = link.constructor === Object ? link.to : link
-            const useLinkActive = link.active ? 'active' : undefined
+            const useLinkActive = link.active ? 'active' : useLinkTo === activeLink && 'active' 
             const useLinkDisabled = link.disabled ? 'disabled' : undefined
 
             return (
